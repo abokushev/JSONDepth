@@ -19,7 +19,7 @@ namespace JSONDepth
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            JSONOutput.Text = Output("");//JSONInput.Text);
+            JSONOutput.Text = Output(JSONInput.Text);
         }
 
         public String Output(string input)
