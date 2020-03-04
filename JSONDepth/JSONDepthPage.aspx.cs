@@ -10,7 +10,8 @@ using Newtonsoft.Json.Linq;
 namespace JSONDepth
 {
     public partial class JSONDepthCalculatingWebForm : System.Web.UI.Page
-    { 
+    {
+        private static readonly string invalidJSONResponse = "{\"error\": \"Invalid JSON\"}";
         protected void Page_Load(object sender, EventArgs args){}
 
         protected void Button1_Click(object sender, EventArgs args)
@@ -19,12 +20,13 @@ namespace JSONDepth
             JSONOutput.Text = ProcessJSON(JSONInput.Text);
         }
 
-        //Checks correctness of JSON string and returns information about it
+        /// <summary>
+        ///Checks correctness of JSON string and returns information about it
+        /// </summary>
         public String ProcessJSON(string jsonInString)
         {
             int maxDepth = 0;
-            JObject jsonRoot = null;
-            string invalidJSONResponse = "{\"error\": \"Invalid JSON\"}";
+            JObject jsonRoot = null;            
             try
             {
                 jsonRoot = JsonConvert.DeserializeObject<JObject>(jsonInString);
@@ -40,7 +42,9 @@ namespace JSONDepth
             return "{\"levels\" : " + CalculateJSONDepth(jsonRoot, 0, maxDepth).ToString() + '}';            
         }
 
-        //Calculates depth of JSON
+        /// <summary>
+        ///Calculates depth of JSON
+        /// </summary>
         private int CalculateJSONDepth(JToken objTree, int iChildDepth, int maxDepth)
         {            
             if (objTree.Values().Count() > 0)
