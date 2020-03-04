@@ -15,7 +15,7 @@ namespace JSONDepth
         private static readonly string invalidJSONResponse = "{\"error\": \"Invalid JSON\"}";
         protected void Page_Load(object sender, EventArgs args){}
 
-        protected void Button1_Click(object sender, EventArgs args)
+        protected void CalculateJsonMaxDepthButton(object sender, EventArgs args)
         {
             
             JSONOutput.Text = ProcessJSON(JSONInput.Text);

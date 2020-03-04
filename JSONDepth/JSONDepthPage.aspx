@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
         <div>
             &nbsp;<asp:TextBox ID="JSONInput" runat="server"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:Button ID="Button1" runat="server" OnClick="CalculateJsonMaxDepthButton" Text="Button" />
         </div>        
     </form>
     <p>
