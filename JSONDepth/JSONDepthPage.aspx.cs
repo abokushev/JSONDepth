@@ -24,17 +24,18 @@ namespace JSONDepth
         {
             int maxDepth = 0;
             JObject jsonRoot = null;
+            string invalidJSONResponse = "{\"error\": \"Invalid JSON\"}";
             try
             {
                 jsonRoot = JsonConvert.DeserializeObject<JObject>(jsonInString);
                 if(jsonRoot == null)
                 {
-                    return "{\"error\": \"Invalid JSON\"}";
+                    return invalidJSONResponse;
                 }
             }
             catch (Exception ex)
             {    
-                return "{\"error\": \"Invalid JSON\"}";
+                return invalidJSONResponse;
             }            
             return "{\"levels\" : " + CalculateJSONDepth(jsonRoot, 0, maxDepth).ToString() + '}';            
         }
