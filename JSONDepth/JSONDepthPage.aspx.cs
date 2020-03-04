@@ -27,6 +27,7 @@ namespace JSONDepth
         /// /// <returns>
         /// The output for the program. 
         /// </returns>
+        /// <param name="jsonInString">JSON string from web page.</param>
         public String ProcessJSON(string jsonInString)
         {
             int maxDepth = 0;
@@ -52,6 +53,9 @@ namespace JSONDepth
         /// <returns>
         /// The depth of JSON.
         /// </returns>
+        /// <param name="objTree">JToken using in JObject's depth calculation.</param>
+        /// <param name="iChildDepth">Current JToken's depth.</param>
+        /// <param name="maxDepth">Parameter to calculate the depth of the JSON</param>
         private int CalculateJSONDepth(JToken objTree, int iChildDepth, int maxDepth)
         {            
             if (objTree.Values().Count() > 0)
