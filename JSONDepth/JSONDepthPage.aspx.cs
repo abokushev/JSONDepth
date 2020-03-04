@@ -19,6 +19,7 @@ namespace JSONDepth
             JSONOutput.Text = ProcessJSON(JSONInput.Text);
         }
 
+        //Checks correctness of JSON string and returns information about it
         public String ProcessJSON(string jsonInString)
         {
             int maxDepth = 0;
@@ -38,6 +39,7 @@ namespace JSONDepth
             return "{\"levels\" : " + CalculateJSONDepth(jsonRoot, 0, maxDepth).ToString() + '}';            
         }
 
+        //Calculates depth of JSON
         private int CalculateJSONDepth(JToken objTree, int iChildDepth, int maxDepth)
         {            
             if (objTree.Values().Count() > 0)
