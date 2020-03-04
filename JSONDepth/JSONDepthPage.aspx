@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="JSONDepthPage.aspx.cs" Inherits="JSONDepth.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="JSONDepthPage.aspx.cs" Inherits="JSONDepth.JSONDepthCalculatingWebForm" %>
 
 <!DOCTYPE html>
 

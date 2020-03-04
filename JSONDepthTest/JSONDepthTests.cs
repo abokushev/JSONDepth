@@ -14,8 +14,8 @@ namespace JSONDepthTest
             string input = "{\"identity\": {\"name\": \"Test\", \"translations\": [{\"order\": 1, \"language\": \"ru\", \"value\": \"Тест\"}]}}";
             string output = "{\"levels\" : 4}";
 
-            WebForm1 wf = new WebForm1();
-            Assert.AreEqual(output, wf.Output(input));
+            JSONDepthCalculatingWebForm wf = new JSONDepthCalculatingWebForm();
+            Assert.AreEqual(output, wf.ProcessJSON(input));
         }
 
         //check JSON with depth 1
@@ -25,8 +25,8 @@ namespace JSONDepthTest
             string input = "{ \"key\": \"value\"}";
             string output = "{\"levels\" : 1}";
 
-            WebForm1 wf = new WebForm1();
-            Assert.AreEqual(output, wf.Output(input));
+            JSONDepthCalculatingWebForm wf = new JSONDepthCalculatingWebForm();
+            Assert.AreEqual(output, wf.ProcessJSON(input));
         }
 
         //check invalid JSON
@@ -36,8 +36,8 @@ namespace JSONDepthTest
             string input = "{\"incorrect: \"value\"}";
             string output = "{\"error\": \"Invalid JSON\"}";
 
-            WebForm1 wf = new WebForm1();
-            Assert.AreEqual(output, wf.Output(input));
+            JSONDepthCalculatingWebForm wf = new JSONDepthCalculatingWebForm();
+            Assert.AreEqual(output, wf.ProcessJSON(input));
         }
 
         [TestMethod]
@@ -46,8 +46,8 @@ namespace JSONDepthTest
             string input = "";
             string output = "{\"error\": \"Invalid JSON\"}";
 
-            WebForm1 wf = new WebForm1();
-            Assert.AreEqual(output, wf.Output(input));
+            JSONDepthCalculatingWebForm wf = new JSONDepthCalculatingWebForm();
+            Assert.AreEqual(output, wf.ProcessJSON(input));
         }
     }
 }

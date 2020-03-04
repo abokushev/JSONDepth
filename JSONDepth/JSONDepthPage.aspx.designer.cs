@@ -10,7 +10,7 @@
 namespace JSONDepth {
     
     
-    public partial class WebForm1 {
+    public partial class JSONDepthCalculatingWebForm {
         
         /// <summary>
         /// form1 элемент управления.

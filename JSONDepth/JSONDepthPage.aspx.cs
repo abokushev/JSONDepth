@@ -9,56 +9,53 @@ using Newtonsoft.Json.Linq;
 
 namespace JSONDepth
 {
-    public partial class WebForm1 : System.Web.UI.Page
-    {
-        protected int maxDepth = 0;
-        protected void Page_Load(object sender, EventArgs e)
-        {
+    public partial class JSONDepthCalculatingWebForm : System.Web.UI.Page
+    { 
+        protected void Page_Load(object sender, EventArgs args){}
 
+        protected void Button1_Click(object sender, EventArgs args)
+        {
+            
+            JSONOutput.Text = ProcessJSON(JSONInput.Text);
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        public String ProcessJSON(string jsonInString)
         {
-            JSONOutput.Text = Output(JSONInput.Text);
-        }
-
-        public String Output(string input)
-        {
+            int maxDepth = 0;
             JObject jsonRoot = null;
             try
             {
-                jsonRoot = JsonConvert.DeserializeObject<JObject>(input);
+                jsonRoot = JsonConvert.DeserializeObject<JObject>(jsonInString);
                 if(jsonRoot == null)
                 {
-                    throw new Exception();
+                    return "{\"error\": \"Invalid JSON\"}";
                 }
             }
             catch (Exception ex)
             {    
                 return "{\"error\": \"Invalid JSON\"}";
-            }           
-            JSONDepth(jsonRoot, maxDepth);
-            return "{\"levels\" : " + maxDepth.ToString() + '}';            
+            }            
+            return "{\"levels\" : " + CalculateJSONDepth(jsonRoot, 0, maxDepth).ToString() + '}';            
         }
 
-        private void JSONDepth(JToken objTree, int iChildDepth)
-        {           
-            iChildDepth++;            
+        private int CalculateJSONDepth(JToken objTree, int iChildDepth, int maxDepth)
+        {            
             if (objTree.Values().Count() > 0)
             {
+                iChildDepth++;
                 if (maxDepth < iChildDepth)
                 {
                     maxDepth = iChildDepth;
                 }
                 foreach (JToken jt in objTree.Values())
                 {
-                    JSONDepth(jt, iChildDepth);
+                    if (maxDepth < CalculateJSONDepth(jt, iChildDepth, maxDepth))
+                    {
+                        maxDepth = CalculateJSONDepth(jt, iChildDepth, maxDepth);
+                    }
                 }
             }
-            else
-            {
-                return;
-            }
+            return maxDepth;
         }
     }
 }
